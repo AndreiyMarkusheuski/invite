@@ -7,33 +7,30 @@
     <link rel="stylesheet" href="src/scss/main.scss">
 </head>
 <body>
-    <!-- Audio element with loop -->
     <audio id="bgSound" loop>
-        <source src="src/assets/sounds/bg-music.mp3" type="audio/mpeg">
+        <source src="src/assets/sounds/bg-sound.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- Sound control button -->
     <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">
         <span class="sound-on">🔊</span>
         <span class="sound-off hidden">🔇</span>
     </button>
 
-    <div class="container">
-        <header class="header">
-            <h1>Welcome</h1>
-        </header>
-        
-        <main class="main">
-            <div class="card">
-                <!-- Your content will go here -->
-            </div>
-        </main>
+    <div id="particles-js"></div>
 
-        <footer class="footer">
-            <p>&copy; 2024. All rights reserved.</p>
-        </footer>
+    <!-- First Layer -->
+    <div class="first-layer" id="firstLayer">
     </div>
+
+    <!-- Second Layer (Initially Hidden) -->
+    <div class="container hidden" id="mainContent">
+        <main class="main">
+        </main>
+    </div>
+    
+    <!-- Add particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="src/js/main.js"></script>
 </body>
 </html> 
