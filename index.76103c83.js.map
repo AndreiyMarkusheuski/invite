@@ -1,1 +1,0 @@
-{"mappings":"AACAA,SAASC,iBAAiB,oBAAoB,KAC1CC,QAAQC,IAAI,cAAc","sources":["src/js/main.js"],"sourcesContent":["// Your JavaScript code will go here\ndocument.addEventListener('DOMContentLoaded', () => {\n    console.log('Site loaded');\n}); "],"names":["document","addEventListener","console","log"],"version":3,"file":"index.76103c83.js.map"}
