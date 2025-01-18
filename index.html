@@ -5,15 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Site Invite</title>
     <link rel="stylesheet" href="src/scss/main.scss">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
 <body>
     <!-- Loader -->
     <div id="loader" class="loader-wrapper">
-        <div class="loader">
-            <div class="loader-inner"></div>
+        <div class="loader-blocks">
+            <!-- 10 blocks for loading animation -->
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
         </div>
-        <div class="loader-text">Загрузочка приглашеньечка...</div>
-        <div class="loader-progress">0%</div>
+        <div class="loader-text">Загрузочка приглашеньичка...</div>
     </div>
 
     <!-- Rest of content (initially hidden) -->
@@ -46,6 +56,6 @@
     
     <!-- Add particles.js library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="src/js/main.js"></script>
+    <script type="module" src="src/js/main.js"></script>
 </body>
 </html> 

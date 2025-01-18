@@ -3,20 +3,7 @@ $primary-color: #333;
 $background-color: #f5f5f5;
 $background-image: url('../assets/images/bg.jpg');
 
-// Cursor animation frames
-@keyframes cursor-animation {
-  0% { cursor: url('../assets/cursors/frame-1.png'), auto; }
-  12.5% { cursor: url('../assets/cursors/frame-2.png'), auto; }
-  25% { cursor: url('../assets/cursors/frame-3.png'), auto; }
-  37.5% { cursor: url('../assets/cursors/frame-4.png'), auto; }
-  50% { cursor: url('../assets/cursors/frame-5.png'), auto; }
-  62.5% { cursor: url('../assets/cursors/frame-6.png'), auto; }
-  75% { cursor: url('../assets/cursors/frame-7.png'), auto; }
-  87.5% { cursor: url('../assets/cursors/frame-8.png'), auto; }
-  100% { cursor: url('../assets/cursors/frame-1.png'), auto; }
-}
-
-// Breakpoints in pixels
+// Breakpoints
 $breakpoints: (
   'iphone': 375px,
   'iphone-max': 428px,
@@ -25,19 +12,59 @@ $breakpoints: (
   'desktop': 1440px
 );
 
-// Mixins for responsive design
+// Animations
+@keyframes cursor-animation {
+  0%, 100% { cursor: url('../assets/cursors/frame-1.png'), auto; }
+  12.5% { cursor: url('../assets/cursors/frame-2.png'), auto; }
+  25% { cursor: url('../assets/cursors/frame-3.png'), auto; }
+  37.5% { cursor: url('../assets/cursors/frame-4.png'), auto; }
+  50% { cursor: url('../assets/cursors/frame-5.png'), auto; }
+  62.5% { cursor: url('../assets/cursors/frame-6.png'), auto; }
+  75% { cursor: url('../assets/cursors/frame-7.png'), auto; }
+  87.5% { cursor: url('../assets/cursors/frame-8.png'), auto; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes rotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Mixins
 @mixin respond-to($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
     @media (min-width: map-get($breakpoints, $breakpoint)) {
       @content;
     }
   } @else {
-    @warn "No value could be retrieved from `#{$breakpoint}`. "
-        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    @warn "Unknown breakpoint `#{$breakpoint}`. Available breakpoints: #{map-keys($breakpoints)}.";
   }
 }
 
-// Base font size calculations for rem
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin fixed-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin glass-effect {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+// Base styles
 html {
   font-size: 16px;
   
@@ -57,7 +84,7 @@ html {
   animation: cursor-animation 1s infinite;
 }
 
-// For clickable elements (they will have the same animation)
+// Cursor animation for interactive elements
 a, 
 button,
 [role="button"],
@@ -67,44 +94,38 @@ input[type="reset"] {
   animation: cursor-animation 1s infinite;
 }
 
+// Layout
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   color: $primary-color;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-  // Background styles
-  background-image: $background-image;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   min-height: 100vh;
   
-  // Optional overlay for better text readability
+  background: {
+    image: $background-image;
+    size: cover;
+    position: center;
+    repeat: no-repeat;
+    attachment: fixed;
+  }
+  
   &::before {
+    @include fixed-fullscreen;
     content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2); // Adjust opacity as needed
+    background: rgba(0, 0, 0, 0.2);
     z-index: 0;
   }
 }
 
 .container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100dvh;
-  background-image: url('../assets/images/mail.png'); // Update this path to your second background
-  background-position: 60% 50%;
-  background-size: 50%;
-  background-repeat: no-repeat;
+  @include fixed-fullscreen;
+  background: {
+    position: 60% 50%;
+    size: 50%;
+    repeat: no-repeat;
+  }
   opacity: 0;
   transition: opacity 8.5s ease-in;
   z-index: 10001;
@@ -113,31 +134,21 @@ body {
     opacity: 1;
   }
 
-  // Add glow effect to particles
-  canvas {
-    filter: blur(0.5px) brightness(1.2);
-  }
-
-  // Optional: Add a dark gradient background to make stars more visible
   &::before {
+    @include fixed-fullscreen;
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background: linear-gradient(to bottom, rgba(0,0,0,0.6) 10%, rgba(0,0,0,0.4) 100%);
     pointer-events: none;
   }
 }
 
+// Components
 .card {
-  background: rgba(255, 255, 255, 0.9); // Semi-transparent white
+  background: rgba(255, 255, 255, 0.9);
   padding: 1.5rem;
   border-radius: 0.75rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
-  backdrop-filter: blur(10px); // Adds frosted glass effect
-  -webkit-backdrop-filter: blur(10px); // For Safari
+  @include glass-effect;
   
   @include respond-to('iphone') {
     padding: 2rem;
@@ -148,12 +159,16 @@ body {
   }
 }
 
-// Typography scale using rems
+// Typography
+%text-shadow {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  color: white;
+}
+
 h1 {
+  @extend %text-shadow;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
   
   @include respond-to('laptop') {
     font-size: 2.5rem;
@@ -161,46 +176,32 @@ h1 {
 }
 
 h2 {
+  @extend %text-shadow;
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 h3 {
+  @extend %text-shadow;
   font-size: 1.25rem;
   margin-bottom: 0.75rem;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 p {
+  @extend %text-shadow;
   font-size: 1rem;
   margin-bottom: 1rem;
-  color: white;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
-// Spacing utilities
-.mt-1 { margin-top: 0.25rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-3 { margin-top: 1rem; }
-.mt-4 { margin-top: 1.5rem; }
-.mt-5 { margin-top: 2rem; }
+// Utilities
+@for $i from 1 through 5 {
+  .mt-#{$i} { margin-top: $i * 0.25rem; }
+  .mb-#{$i} { margin-bottom: $i * 0.25rem; }
+  .p-#{$i} { padding: $i * 0.25rem; }
+}
 
-.mb-1 { margin-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 1rem; }
-.mb-4 { margin-bottom: 1.5rem; }
-.mb-5 { margin-bottom: 2rem; }
-
-.p-1 { padding: 0.25rem; }
-.p-2 { padding: 0.5rem; }
-.p-3 { padding: 1rem; }
-.p-4 { padding: 1.5rem; }
-.p-5 { padding: 2rem; } 
-
-// Sound toggle button
+// Components
 .sound-toggle {
   position: fixed;
   bottom: 2rem;
@@ -212,8 +213,7 @@ p {
   width: 3rem;
   height: 3rem;
   font-size: 1.5rem;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  @include glass-effect;
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -226,136 +226,220 @@ p {
   .sound-off {
     display: block;
     line-height: 1;
+    
+    &.hidden {
+      display: none;
+    }
   }
-
-  .hidden {
-    display: none;
-  }
-} 
+}
 
 .hidden {
-    display: none !important;
-    opacity: 0;
-    visibility: hidden;
+  // display: none !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1.5s ease-out;
 }
 
 .first-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-image: url('../assets/images/gifgivecom.gif'); // Update this path to your first background
-    background-position: 18% 100%;
-    background-size: 25%;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease-out;
-    z-index: 10001;
+  @include fixed-fullscreen;
+  @include flex-center;
+  background: {
+    image: url('../assets/images/gifgivecom.gif');
+    position: 18% 100%;
+    size: 25%;
+    repeat: no-repeat;
+  }
+  cursor: pointer;
+  transition: opacity 0.5s ease-out;
+  z-index: 10001;
 
-    .click-message {
-        color: white;
-        font-size: 1.5rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        animation: pulse 2s infinite;
-    }
+  .click-message {
+    color: white;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: pulse 2s infinite;
+  }
 
-    // Optional: Add a dark gradient background to make stars more visible
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
-        pointer-events: none;
-    }
+  &::before {
+    @include fixed-fullscreen;
+    content: '';
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+    pointer-events: none;
+  }
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-} 
-
 #particles-js {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10000;
-    pointer-events: all;
-    background: transparent;
+  @include fixed-fullscreen;
+  z-index: 10000;
+  pointer-events: all;
+  background: transparent;
 
-    // Add glow effect to particles
-    canvas {
-        filter: blur(0.5px) brightness(1.2);
-    }
-} 
+  canvas {
+    filter: blur(0.5px) brightness(1.2);
+  }
+}
 
 .message {
-    position: fixed;
-    top: 20px; // Adjust as needed
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #333;
-    padding: 10px 20px;
-    border-radius: 5px;
-    z-index: 10002; // Ensure it's above other elements
-    font-size: 1.2rem;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-} 
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 10002;
+  font-size: 1.2rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  min-width: 300px;
 
-// Loader styles
+  .ml3 {
+    display: inline-block;
+    
+    .letter {
+      display: inline-block;
+      opacity: 0;
+    }
+  }
+}
+
+// Loader
 .loader-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
+  @include fixed-fullscreen;
+  @include flex-center;
+  background: #000;
+  flex-direction: column;
+  z-index: 99999;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .loader {
-    width: 60px;
-    height: 60px;
-    border: 5px solid #ffffff;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+  width: 300px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 2px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  &-inner {
+    height: 100%;
+    background: linear-gradient(90deg, #dac5ed, #f2d5f5);
+    border-radius: 8px;
+    transition: width 0.3s ease-out;
+    width: 0%;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      animation: loading-shine 1.5s infinite;
+    }
+  }
+}
+
+.loader-blocks {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+
+  .block {
+    width: 12px;
+    height: 12px;
+    background: #dac5ed;
+    border-radius: 2px;
+    opacity: 0.2;
+    transform: scale(0);
+    transition: all 0.3s ease;
+
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        animation: block-appear 0.5s ease forwards;
+        animation-delay: $i * 0.1s;
+      }
+    }
+
+    &.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
 
 .loader-text {
-    color: #ffffff;
-    margin-top: 20px;
-    font-size: 1.2rem;
+  color: #ffffff;
+  margin-top: 20px;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  text-transform: none;
+  font-weight: normal;
+  text-align: center;
 }
 
 .loader-progress {
-    color: #ffffff;
-    margin-top: 10px;
-    font-size: 1rem;
+  color: #ffffff;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
-@keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-} 
+@keyframes loading-shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes block-appear {
+  0% {
+    transform: scale(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#mainWrapper {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease-in;
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

@@ -25,7 +25,10 @@
     "node": ">=14.0.0"
   },
   "staticFiles": {
-    "staticPath": "src/assets",
+    "staticPath": [
+      "src/assets",
+      "src/fonts"
+    ],
     "staticOutPath": "assets"
   }
 }
