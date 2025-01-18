@@ -7,26 +7,41 @@
     <link rel="stylesheet" href="src/scss/main.scss">
 </head>
 <body>
-    <audio id="bgSound" loop>
-        <source src="src/assets/sounds/bg-sound.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">
-        <span class="sound-on">🔊</span>
-        <span class="sound-off hidden">🔇</span>
-    </button>
-
-    <div id="particles-js"></div>
-
-    <!-- First Layer -->
-    <div class="first-layer" id="firstLayer">
+    <!-- Loader -->
+    <div id="loader" class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-inner"></div>
+        </div>
+        <div class="loader-text">Загрузочка приглашеньечка...</div>
+        <div class="loader-progress">0%</div>
     </div>
 
-    <!-- Second Layer (Initially Hidden) -->
-    <div class="container hidden" id="mainContent">
-        <main class="main">
-        </main>
+    <!-- Rest of content (initially hidden) -->
+    <div id="mainWrapper" class="hidden">
+        <audio id="bgSound" loop>
+            <source src="src/assets/sounds/bg-sound.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">
+            <span class="sound-on">🔊</span>
+            <span class="sound-off hidden">🔇</span>
+        </button>
+
+        <div id="particles-js"></div>
+
+        <!-- First Layer -->
+        <div class="first-layer" id="firstLayer">
+        </div>
+
+        <!-- Message Display -->
+        <div id="message" class="message"></div>
+
+        <!-- Second Layer (Initially Hidden) -->
+        <div class="container hidden" id="mainContent">
+            <main class="main">
+            </main>
+        </div>
     </div>
     
     <!-- Add particles.js library -->
