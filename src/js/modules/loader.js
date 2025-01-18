@@ -14,7 +14,8 @@ export class Loader {
             '../assets/cursors/frame-7.png',
             '../assets/cursors/frame-8.png',
             '../assets/sounds/bg-sound.mp3',
-            'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js'
+            'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js',
+            'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js',
         ];
     }
 

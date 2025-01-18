@@ -1,0 +1,12 @@
+// Utilities
+@for $i from 1 through 5 {
+  .mt-#{$i} { margin-top: $i * 0.25rem; }
+  .mb-#{$i} { margin-bottom: $i * 0.25rem; }
+  .p-#{$i} { padding: $i * 0.25rem; }
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1.5s ease-out;
+} 

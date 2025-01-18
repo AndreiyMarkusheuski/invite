@@ -1,0 +1,152 @@
+#mainWrapper {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease-in;
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.container {
+  @include fixed-fullscreen;
+  background: {
+    position: 60% 50%;
+    size: 50%;
+    repeat: no-repeat;
+  }
+  opacity: 0;
+  transition: opacity 8.5s ease-in;
+  z-index: 10001;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  &::before {
+    @include fixed-fullscreen;
+    content: '';
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 10%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+  }
+}
+
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+  @include glass-effect;
+  
+  @include respond-to('iphone') {
+    padding: 2rem;
+  }
+  
+  @include respond-to('laptop') {
+    padding: 2.5rem;
+  }
+}
+
+.sound-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10002;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  @include glass-effect;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  .sound-on,
+  .sound-off {
+    display: block;
+    line-height: 1;
+    
+    &.hidden {
+      display: none;
+    }
+  }
+} 
+
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1.5s ease-out;
+  }
+  
+  .flower {
+    @include fixed-fullscreen;
+    @include flex-center;
+    background: {
+      image: url('../assets/images/gifgivecom.gif');
+      position: 18% 100%;
+      size: 25%;
+      repeat: no-repeat;
+    }
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+    z-index: 10001;
+  
+    .click-message {
+      color: white;
+      font-size: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      animation: pulse 2s infinite;
+    }
+  }
+  
+  #particles-js {
+    @include fixed-fullscreen;
+    z-index: 10000;
+    pointer-events: all;
+    background: transparent;
+  
+    canvas {
+      filter: blur(0.5px) brightness(1.2);
+    }
+  }
+  
+  .message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    color: white;
+    font-weight: 600;
+    font-size: 2rem;
+    text-align: center;
+
+    padding: 10px 20px;
+    z-index: 10002;
+    min-width: 400px;
+    transition: all 1.5s ease-out;
+  
+    .ml3 {
+      display: inline-block;
+      
+      .letter {
+        display: inline-block;
+        opacity: 0;
+      }
+    }
+  }
+  

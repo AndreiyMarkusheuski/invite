@@ -1,0 +1,103 @@
+// Animations
+@keyframes cursor-animation {
+  0%, 100% { cursor: url('../assets/cursors/frame-1.png'), auto; }
+  12.5% { cursor: url('../assets/cursors/frame-2.png'), auto; }
+  25% { cursor: url('../assets/cursors/frame-3.png'), auto; }
+  37.5% { cursor: url('../assets/cursors/frame-4.png'), auto; }
+  50% { cursor: url('../assets/cursors/frame-5.png'), auto; }
+  62.5% { cursor: url('../assets/cursors/frame-6.png'), auto; }
+  75% { cursor: url('../assets/cursors/frame-7.png'), auto; }
+  87.5% { cursor: url('../assets/cursors/frame-8.png'), auto; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes rotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loading-shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes block-appear {
+  0% {
+    transform: scale(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rainbow-shadow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8),
+                0 0 20px rgba(0, 255, 0, 0.8),
+                0 0 30px rgba(0, 0, 255, 0.8);
+  }
+  25% {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.8),
+                0 0 20px rgba(0, 0, 255, 0.8),
+                0 0 30px rgba(255, 0, 0, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.8),
+                0 0 20px rgba(255, 0, 0, 0.8),
+                0 0 30px rgba(0, 255, 0, 0.8);
+  }
+  75% {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.8),
+                0 0 20px rgba(255, 0, 0, 0.8),
+                0 0 30px rgba(0, 0, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8),
+                0 0 20px rgba(0, 255, 0, 0.8),
+                0 0 30px rgba(0, 0, 255, 0.8);
+  }
+}
+
+@keyframes rainbow-border {
+  0% {
+    border-color: rgba(255, 0, 0, 0.8);
+  }
+  25% {
+    border-color: rgba(0, 255, 0, 0.8);
+  }
+  50% {
+    border-color: rgba(0, 0, 255, 0.8);
+  }
+  75% {
+    border-color: rgba(0, 255, 0, 0.8);
+  }
+  100% {
+    border-color: rgba(255, 0, 0, 0.8);
+  }
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

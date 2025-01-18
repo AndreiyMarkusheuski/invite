@@ -1,0 +1,89 @@
+// Base styles
+html {
+  font-size: 16px;
+  
+  @include respond-to('iphone') {
+    font-size: 14px;
+  }
+  
+  @include respond-to('laptop') {
+    font-size: 16px;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  animation: cursor-animation 1s infinite;
+}
+
+// Cursor animation for interactive elements
+a, 
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  animation: cursor-animation 1s infinite;
+}
+
+// Layout
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: $primary-color;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  
+  background: {
+    image: $background-image;
+    size: cover;
+    position: center;
+    repeat: no-repeat;
+    attachment: fixed;
+  }
+  
+  &::before {
+    @include fixed-fullscreen;
+    content: '';
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 0;
+  }
+}
+
+// Typography
+%text-shadow {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  color: white;
+}
+
+h1 {
+  @extend %text-shadow;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  
+  @include respond-to('laptop') {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  @extend %text-shadow;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  @extend %text-shadow;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+p {
+  @extend %text-shadow;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+} 

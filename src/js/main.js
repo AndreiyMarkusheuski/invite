@@ -2,6 +2,7 @@ import { Loader } from './modules/loader.js';
 import { AudioController } from './modules/audio-controller.js';
 import { WelcomeMessage } from './modules/welcome-message.js';
 import { particlesConfig } from './modules/particles-config.js';
+import { initModal } from './modules/modal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const loader = new Loader();
@@ -21,23 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeApp() {
         const audioController = new AudioController();
-        const welcomeMessage = new WelcomeMessage();
         
         // Initialize particles
         particlesJS('particles-js', particlesConfig);
-        
-        // Display welcome message
-        welcomeMessage.display();
 
         // Handle layer transition
-        const firstLayer = document.getElementById('firstLayer');
-        const mainContent = document.getElementById('mainContent');
+        const flowerButton = document.getElementById('flowerButton');
+        // const mainContent = document.getElementById('mainContent'); // TODO: add pashal
         
-        firstLayer.addEventListener('click', () => {
-            mainContent.classList.remove('hidden');
+        flowerButton.addEventListener('click', () => {
+            // mainContent.classList.remove('hidden');
             setTimeout(() => {
-                mainContent.classList.add('visible');
+                // mainContent.classList.add('visible');
             }, 50);
         });
+
+        initModal();
     }
 }); 

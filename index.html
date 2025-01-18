@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Site Invite</title>
     <link rel="stylesheet" href="src/scss/main.scss">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
 <body>
+    <!-- Audio -->
+    <aside class="audio-wrapper">
+        <audio id="bgSound" loop>
+            <source src="src/assets/sounds/bg-sound.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">
+            <span class="sound-on">🔊</span>
+            <span class="sound-off hidden">🔇</span>
+        </button>
+    </aside>
+
     <!-- Loader -->
     <div id="loader" class="loader-wrapper">
         <div class="loader-blocks">
@@ -28,34 +39,26 @@
 
     <!-- Rest of content (initially hidden) -->
     <div id="mainWrapper" class="hidden">
-        <audio id="bgSound" loop>
-            <source src="src/assets/sounds/bg-sound.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
 
-        <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">
-            <span class="sound-on">🔊</span>
-            <span class="sound-off hidden">🔇</span>
-        </button>
 
         <div id="particles-js"></div>
 
-        <!-- First Layer -->
-        <div class="first-layer" id="firstLayer">
+        <div class="flower" id="flowerButton">
         </div>
 
-        <!-- Message Display -->
-        <div id="message" class="message"></div>
+        <!-- Main Message Display -->
+        <div id="message" class="message hidden"></div>
 
-        <!-- Second Layer (Initially Hidden) -->
-        <div class="container hidden" id="mainContent">
-            <main class="main">
-            </main>
+        <!-- Modal -->
+        <div id="modal" class="modal">
+            <div id="modalButton" class="modal-content">
+                <p class="modal-content-text">Вы готовы продолжить?</p>
+            </div>
         </div>
+
     </div>
     
     <!-- Add particles.js library -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="module" src="src/js/main.js"></script>
 </body>
 </html> 
