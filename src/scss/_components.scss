@@ -23,7 +23,7 @@
   }
   opacity: 0;
   transition: opacity 8.5s ease-in;
-  z-index: 10001;
+  z-index: z('container');
 
   &.visible {
     opacity: 1;
@@ -58,7 +58,7 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  z-index: 10002;
+  z-index: z('sound-toggle');
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
@@ -93,17 +93,20 @@
   }
   
   .flower {
-    @include fixed-fullscreen;
+    position: fixed;
+    bottom: 0;
+    left: 10%;
+    width: 400px;
+    height: 400px;
     @include flex-center;
     background: {
       image: url('../assets/images/gifgivecom.gif');
-      position: 18% 100%;
-      size: 25%;
+      size: contain;
       repeat: no-repeat;
     }
     cursor: pointer;
     transition: all 0.5s ease-out;
-    z-index: 10001;
+    z-index: z('flower');
   
     .click-message {
       color: white;
@@ -111,11 +114,16 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       animation: pulse 2s infinite;
     }
+
+    @include respond-to('iphone') {
+      width: 200px;
+      height: 200px;
+    }
   }
   
   #particles-js {
     @include fixed-fullscreen;
-    z-index: 10000;
+    z-index: z('particles');
     pointer-events: all;
     background: transparent;
   
@@ -126,19 +134,39 @@
   
   .message {
     position: fixed;
-    top: 50%;
+    top: 10%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    
-    color: white;
-    font-weight: 600;
-    font-size: 2rem;
-    text-align: center;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    @include respond-to('laptop') {
+      top: 30%;
+      align-items: center;
+    }
 
     padding: 10px 20px;
-    z-index: 10002;
+    z-index: z('message');
     min-width: 400px;
     transition: all 1.5s ease-out;
+    max-width: 80%;
+    width: 100%;
+
+    & .ml3, & .word {
+      color: white;
+      margin: 0;
+      font-size: 40px;
+      text-align: center;
+
+      @include respond-to('laptop') {
+        font-size: 50px;
+      }
+    }
+
+    & .word {
+      white-space: nowrap;
+    }
   
     .ml3 {
       display: inline-block;
@@ -146,6 +174,41 @@
       .letter {
         display: inline-block;
         opacity: 0;
+      }
+    }
+
+    &-button {
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      opacity: 0;
+      animation: fadeInUp 0.5s ease-out forwards;
+
+      display: inline-block;
+      padding: 10px 30px 0;
+      background-color: #ff69b4;
+      color: white;
+      text-decoration: none;
+      border-radius: 40px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+
+      font-size: 40px;
+
+      @include respond-to('laptop') {
+        font-size: 50px;
+      }
+      
+      &:hover {
+        background-color: #ff1493;
+        box-shadow: 0 6px 8px rgba(242, 94, 94, 0.2);
+      }
+      
+      &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
     }
   }

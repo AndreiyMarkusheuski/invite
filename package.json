@@ -27,7 +27,10 @@
   "staticFiles": {
     "staticPath": [
       "src/assets",
-      "src/fonts"
+      {
+        "outDirPattern": "**/fonts",
+        "staticPath": "src/fonts"
+      }
     ],
     "staticOutPath": "assets"
   }

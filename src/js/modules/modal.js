@@ -6,7 +6,7 @@ export function initModal() {
     const message = document.getElementById("message");
     const welcomeMessage = new WelcomeMessage();
 
-    modalButton.onclick = () => {
+    const handleModalButtonClick = () => {
         modal.classList.add("hidden");
 
         setTimeout(() => {
@@ -14,7 +14,12 @@ export function initModal() {
 
             setTimeout(() => {
                 welcomeMessage.display();
+                modal.classList.add("remove");
             }, 500);
         }, 500);
+
+        modalButton.removeEventListener('click', handleModalButtonClick);
     };
+
+    modalButton.addEventListener('click', handleModalButtonClick);
 }

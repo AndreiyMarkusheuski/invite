@@ -3,6 +3,7 @@ import { AudioController } from './modules/audio-controller.js';
 import { WelcomeMessage } from './modules/welcome-message.js';
 import { particlesConfig } from './modules/particles-config.js';
 import { initModal } from './modules/modal.js';
+import { EasterEgg } from './modules/easter-egg.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const loader = new Loader();
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeApp() {
         const audioController = new AudioController();
+        const easterEgg = new EasterEgg(); // Initialize easter egg
         
         // Initialize particles
         particlesJS('particles-js', particlesConfig);
