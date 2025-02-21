@@ -172,7 +172,8 @@
       margin: 0;
       font-size: 40px;
       text-align: center;
-      line-height: 90%;
+      line-height: 0.9;
+      
 
       @include respond-to('laptop') {
         font-size: 50px;
@@ -181,7 +182,7 @@
 
     & .word {
       white-space: nowrap;
-      line-height: 90%;
+      line-height: 0.9;
     }
   
     .ml3 {
@@ -190,7 +191,7 @@
       .letter {
         display: inline-block;
         opacity: 0;
-        line-height: 90%;
+        line-height: 0.9;
       }
     }
 
@@ -206,7 +207,10 @@
       animation: fadeInUp 0.5s ease-out forwards;
 
       display: inline-block;
-      padding: 15px 35px 5px;
+      padding: 30px 35px 35px; /* Windows */
+            @supports not (-webkit-hyphens: none) {
+                padding: 35px 35px 25px; /* macOS */
+            }
       background-color: #ff69b4;
       color: white;
       text-decoration: none;
@@ -214,7 +218,7 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
       font-family: inherit;
-      line-height: 90%;
+      line-height: 0;
 
       font-size: 40px;
       
@@ -244,7 +248,7 @@
         padding: 0;
         font-size: 40px;
         text-align: center;
-        line-height: 90%;
+        line-height: 0;
         
         &:hover {
             text-decoration: none;

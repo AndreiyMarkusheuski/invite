@@ -32,7 +32,7 @@ input[type="reset"] {
 body {
   font-family: $font-primary !important;
   color: $primary-color;
-  line-height: 1.6;
+  line-height: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
