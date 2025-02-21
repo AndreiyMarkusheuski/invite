@@ -8,15 +8,13 @@ export function initModal() {
 
     const handleModalButtonClick = () => {
         modal.classList.add("hidden");
+        message.classList.remove("hidden");
 
-        setTimeout(() => {
-            message.classList.remove("hidden");
 
             setTimeout(() => {
                 welcomeMessage.display();
                 modal.classList.add("remove");
             }, 500);
-        }, 500);
 
         modalButton.removeEventListener('click', handleModalButtonClick);
     };

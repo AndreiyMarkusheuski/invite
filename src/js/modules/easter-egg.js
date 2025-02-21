@@ -16,7 +16,6 @@ export class EasterEgg {
         
         this.mainWrapper.appendChild(modal);
         
-        // Remove modal after animation
         setTimeout(() => {
             modal.classList.add('fade-out');
             setTimeout(() => {

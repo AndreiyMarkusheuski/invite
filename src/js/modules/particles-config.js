@@ -1,14 +1,14 @@
-export const particlesConfig = {
+export const flyingStarsConfig = {
     particles: {
         number: {
-            value: 100,
+            value: 300,
             density: {
                 enable: true,
                 value_area: 800
             }
         },
         color: {
-            value: ["#ffffff", "#dac5ed", "#f2d5f5"]
+            value: ["#ffffff", "#dac5ed", "#f2d5f5", "#ffc0cb", "#C0C0C0"]
         },
         shape: {
             type: "star",
@@ -36,7 +36,7 @@ export const particlesConfig = {
             anim: {
                 enable: true,
                 speed: 4,
-                size_min: 0.5,
+                size_min: 0.2,
                 sync: false
             }
         },
@@ -68,6 +68,14 @@ export const particlesConfig = {
             onclick: {
                 enable: true,
                 mode: "repulse"
+            },
+            ontouchstart: {
+                enable: true,
+                mode: "repulse"
+            },
+            ontouchmove: {
+                enable: true,
+                mode: "bubble"
             },
             resize: true
         },
