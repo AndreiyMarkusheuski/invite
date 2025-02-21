@@ -207,10 +207,6 @@
       animation: fadeInUp 0.5s ease-out forwards;
 
       display: inline-block;
-      padding: 30px 35px 35px; /* Windows */
-            @supports not (-webkit-hyphens: none) {
-                padding: 35px 35px 25px; /* macOS */
-            }
       background-color: #ff69b4;
       color: white;
       text-decoration: none;
@@ -221,6 +217,14 @@
       line-height: 0;
 
       font-size: 40px;
+
+      &.--mac {
+        padding: 35px 35px 25px; /* macOS */
+      }
+
+      &.--windows {
+        padding: 30px 35px 25px; /* Windows */
+      }
       
       &:hover {
         background-color: #ff1493;
@@ -265,8 +269,8 @@
     transition: all .5s ease-in-out;
 
     &::before {
-      content: "\f005";
-      font-family: FontAwesome;
+      content: "⭐";
+      // font-family: FontAwesome;
       text-shadow: 0 0 5px #fff, 0 0 20px #fff, 0 0 50px #fff;
     }
 

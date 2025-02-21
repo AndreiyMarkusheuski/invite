@@ -3,6 +3,7 @@ import { flyingStarsConfig } from './modules/particles-config.js';
 import { initModal } from './modules/modal.js';
 import { EasterEgg } from './modules/easter-egg.js';
 import ParallaxBackground from './modules/parallax';
+import { detectOS } from './modules/detect-os.js';
 
 /* eslint-disable */
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,6 +38,7 @@ function initializeApp() {
     console.log('Мы разам працавалі, каб зрабіць гэтае маленькае цудоўнае месца для вас. Спадзяюся, вам спадабаецца!');
     const audioController = new AudioController();
     const easterEgg = new EasterEgg();
+    detectOS();
 
     particlesJS('flyingStars', flyingStarsConfig);
     new ParallaxBackground();

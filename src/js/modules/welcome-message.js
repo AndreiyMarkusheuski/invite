@@ -1,3 +1,5 @@
+import { getOS } from './detect-os';
+
 const formUrl = 'https://docs.google.com/forms/d/1OdO48KtC-nQwa8QJsFPHxeI7QAb-fJG39HiDiQkktlg/viewform?edit_requested=true';
 
 export class WelcomeMessage {
@@ -69,10 +71,15 @@ export class WelcomeMessage {
         const button = document.createElement('button');
         button.type = 'button';
         button.textContent = 'Cюды';
+        if (getOS() === 'mac') {
+            button.classList.add('--mac');
+        } else {
+            button.classList.add('--win');
+        }
         button.title = 'кнопка адкрыць форму';
         button.classList.add('message-button');
-        
-        button.addEventListener('click', async (e) => {
+
+        const buttonAction = async (e) => {
             e.preventDefault();
             button.classList.add('hidden');
             
@@ -86,7 +93,7 @@ export class WelcomeMessage {
             });
 
             const newWindow = await popupPromise;
-            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+            if ((!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') && !document.querySelector('.backup-text')) {
                 const backupText = document.createElement('p');
                 backupText.target = '_blank';
                 backupText.classList.add('backup-text');
@@ -94,12 +101,15 @@ export class WelcomeMessage {
                 document.querySelector('#message').appendChild(backupText);
                 
                 button.classList.remove('hidden');
-                button.removeEventListener('click', this);
+                button.removeEventListener('click', buttonAction);
                 button.addEventListener('click', () => {
                     window.open(formUrl, '_blank', 'noopener,noreferrer');
                 });
             }
-        });
+        }
+        
+        button.addEventListener('click', buttonAction);
+
 
         return button;
     }

@@ -1,103 +1,123 @@
 // Loader
 
-.loader-wrapper {
-  @include fixed-fullscreen;
-  @include flex-center;
-  background: #000;
-  flex-direction: column;
-  z-index: 99999;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.8s ease-out;
-
-  &.hidden {
-    opacity: 0;
-  }
-}
+// Variables
+$loader-width: 300px;
+$loader-height: 20px;
+$block-size: 12px;
+$block-gap: 4px;
+$loader-colors: (
+  primary: #dac5ed,
+  secondary: #f2d5f5,
+  white: #ffffff,
+);
+$animations: (
+  shine: 1.5s,
+  block-appear: 1s,
+);
 
 .loader {
-  width: 300px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50px;
-  padding: 2px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-  transition: all 1.3s ease;
 
-  &-inner {
-    height: 100%;
-    background: linear-gradient(90deg, #dac5ed, #f2d5f5);
-    border-radius: 5px;
-    transition: width 0.3s ease-out;
-    width: 0%;
-    position: relative;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+    @include fixed-fullscreen;
+    @include flex-center;
+    background: #000;
+    flex-direction: column;
+    z-index: 99999;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s ease-out;
+
+    &.hidden {
+      opacity: 0;
+    }
+
+    // width: $loader-width;
+    // height: $loader-height;
+    // background: rgba(map-get($loader-colors, white), 0.1);
+    // border-radius: 50px;
+    // padding: 2px;
+    // box-shadow: 0 0 10px rgba(map-get($loader-colors, white), 0.2);
+    // position: relative;
+    // overflow: hidden;
+    // transition: all 1.3s ease;
+
+    &-inner {
       height: 100%;
       background: linear-gradient(
         90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
+        map-get($loader-colors, primary),
+        map-get($loader-colors, secondary)
       );
-      animation: loading-shine 1.5s infinite;
-    }
-  }
-}
+      border-radius: 5px;
+      transition: width 0.3s ease-out;
+      width: 0%;
+      position: relative;
 
-.loader-blocks {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 20px;
-
-  .block {
-    width: 12px;
-    height: 12px;
-    background: #dac5ed;
-    border-radius: 50px;
-    opacity: 0.2;
-    transform: scale(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-
-    @for $i from 1 through 10 {
-      &:nth-child(#{$i}) {
-        animation: block-appear 0.5s ease forwards;
-        animation-delay: $i * 0.1s;
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(map-get($loader-colors, white), 0.4),
+          transparent
+        );
+        animation: loading-shine map-get($animations, shine) infinite;
       }
     }
 
-    &.active {
-      opacity: 1;
-      transform: scale(1.1);
+    &-blocks {
+      display: flex;
+      gap: $block-gap;
+      margin-bottom: 20px;
+  
+      .block {
+        width: $block-size;
+        height: $block-size;
+        background: map-get($loader-colors, primary);
+        border-radius: 50px;
+        opacity: 0.2;
+        transform: scale(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+  
+        @for $i from 1 through 10 {
+          &:nth-child(#{$i}) {
+            animation: block-appear map-get($animations, block-appear) ease forwards
+              infinite;
+            animation-delay: $i * 0.1s;
+          }
+        }
+  
+        &.active {
+          opacity: 1;
+          transform: scale(1.1);
+        }
+      }
+    }
+  
+    &-text {
+      color: map-get($loader-colors, white);
+      margin-top: 20px;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(map-get($loader-colors, white), 0.5);
+      text-transform: none;
+      font-weight: normal;
+      text-align: center;
+    }
+  
+    &-progress {
+      color: map-get($loader-colors, white);
+      margin-top: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
     }
   }
-}
 
-.loader-text {
-  color: #ffffff;
-  margin-top: 20px;
-  font-size: 1.5rem;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  text-transform: none;
-  font-weight: normal;
-  text-align: center;
-}
-
-.loader-progress {
-  color: #ffffff;
-  margin-top: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
 
 @keyframes loading-shine {
   0% {
